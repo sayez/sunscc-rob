@@ -7,7 +7,7 @@ focus_on_group=false
 
 
 use_dtypes=['image','T425-T375-T325_fgbg']
-use_npy='rebuttal_all_revised_filtered/all_samples.npy' # Do not set the _train.npy, _val.npy or test.npy,
+use_npy='filtered/all_samples.npy' # Do not set the _train.npy, _val.npy or test.npy,
                                                         # it is added automatically in the dataloader.
 
 use_classes=['A','B','C','SuperGroup','H']
@@ -69,7 +69,7 @@ do
             echo "parts_to_train: $parts_to_train"
 
             echo "./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq"
-            job_id=$(sbatch ./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq)
+            job_id=$(bash ./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq)
         
             # extract job id
             job_id=$(echo $job_id | grep -o -E '[0-9]+')

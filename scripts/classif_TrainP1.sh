@@ -109,7 +109,7 @@ if [ "$data_aug" = false ] ; then
                 ++module.class3_weights="[1,1,1]" \
                 ++dataset.num_workers=$num_workers ++dataset.batch_size=$batch_size \
                 ++dataset.char_to_balance=$char_to_balance \
-                ++logger.0.project=$wandb_project ++logger.0.name=$job_name \
+#               ++logger.0.project=$wandb_project ++logger.0.name=$job_name \
                 
 
 
@@ -140,10 +140,11 @@ else
                 ++module.class3_weights="[1,1,1]" \
                 ++dataset.num_workers=$num_workers ++dataset.batch_size=$batch_size \
                 ++dataset.char_to_balance=$char_to_balance \
-                ++logger.0.project=$wandb_project ++logger.0.name=$job_name \
                 ++dataset.train_dataset.transforms.1.method=$data_aug_type \
                 ++dataset.train_dataset.transforms.2.method=$data_aug_type \
                 ++dataset.train_dataset.transforms.2.p=$data_aug_freq \
+#               ++logger.0.project=$wandb_project ++logger.0.name=$job_name \
+
 
 fi
 

@@ -44,8 +44,8 @@ for use_dtype in ${all_single_thresh[@]}; do
     job_name="${job_name}_run${run_number}"
 
     # echo "sbatch Segmentation_slurm_launcher.sh workers=$num_workers classes=$classes use_dtype=$use_dtype num_epochs=$max_epochs project_name=$project_name job_name=$job_name scheduler_type=$scheduler_type scheduler_interval=$scheduler_interval scheduler_step_size=$scheduler_step_size, run_number=$run_number, classes=$classes"
-    echo "./sunscc/scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes"
-    sbatch ./sunscc/scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes
+    echo "./scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes"
+    sbatch ./scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes
 done
 
 
