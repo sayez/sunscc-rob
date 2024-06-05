@@ -20,13 +20,13 @@ trainer:
 
 # logger: []
 logger:
-  # - _target_: pytorch_lightning.loggers.CSVLogger
-  #   save_dir: 'csv_metrics'
-  - _target_: pytorch_lightning.loggers.WandbLogger
+  - _target_: pytorch_lightning.loggers.CSVLogger
+    save_dir: 'csv_metrics'
+  #- _target_: pytorch_lightning.loggers.WandbLogger
     # name: 'test'
-    project: 'Deepsun_McIntosh'
-    resume: 'auto'
-    save_dir: "."
+  #  project: 'Deepsun_McIntosh'
+  #  resume: 'auto'
+  #  save_dir: "."
 
 use_dtypes: "???"
 use_classes: [ 'A','B','C','SuperGroup','H']
@@ -65,7 +65,7 @@ random_move_percent: .2
 dataset:
   _target_: sunscc.dataset.SunSCCBalancedDataModule
   data_dir: "./datasets/classification/"
-  dataset_name: "2002-2019_2"
+  dataset_name: "2002-2019"
   batch_size: 16
   num_workers: 12
   char_to_balance: "class1"
@@ -138,8 +138,8 @@ callbacks:
     monitor: val_acc1
     mode: max
     filename: "{epoch}-{val_meaniou:.2f}"
-  LR_monitor:
-    _target_: "pytorch_lightning.callbacks.LearningRateMonitor"
+  #LR_monitor:
+  #  _target_: "pytorch_lightning.callbacks.LearningRateMonitor"
   # Save_prediction:
   #   _target_: 'sunscc.callback.ShowMcIntoshClassificationPredictionsCallback'
   #   output_dir: 'predictions'

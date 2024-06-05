@@ -106,7 +106,7 @@ dataset:
       
   test_dataset:     
     _target_: sunscc.dataset.DeepsunSegmentationTestDataset
-    partition: "test_GT"
+    partition: "ManualAnnotation"
     dtypes: ['image', 'GroundTruth']
     patch_side: 512
     transforms:

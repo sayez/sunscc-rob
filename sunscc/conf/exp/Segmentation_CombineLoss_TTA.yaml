@@ -68,7 +68,7 @@ dataset:
 
   test_dataset:     
     _target_: sunscc.dataset.DeepsunSegmentationTTA_TestDataset
-    partition: "test_GT"
+    partition: "ManualAnnotation"
     dtypes: ['image','GroundTruth']
     patch_side: 512
     num_tta: 4
