@@ -11,7 +11,6 @@ import json
 
 import numpy as np
 
-import traceback
 import time
 
 from datetime import datetime, timedelta
