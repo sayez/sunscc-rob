@@ -1,27 +1,72 @@
-This is Niels trying to edit readme
-
 # SunSCC: segmenting, grouping and classifying sunspots from ground-based observations using deep learning
 
 
-# Installation
+## Installation
 
-1) Install pytorch
+1) Clone this repository to desired location.
+
+2) Create a virtual environment using python 3.10 .
+
+    ```
+    conda create -n 'sunscc' python=3.10
+    conda activate sunscc
+    ```
+
+3) From root of the cloned repository, install sunscc as a package.
+    
+    ```
+    pip install -e .
+    ```
+
+4) IMPORTANT: Adapt the paths to local filesystem for datasets/outputs (using symbolic links if needed) - SunSCC expects the following structure:
+
+    ```
+    SUNSCC
+    | -datasets
+    | | - segmentation
+    | | | - All *
+    | | | - ManualAnnotation * 
+    | | - classification
+    # SunSCC: segmenting, grouping and classifying sunspots from ground-based observations using deep learning
+    ```
+
+    `*` = Symbolic link to directories with same name in storage.
+    `**` = Symbolic link to directory where trained models can be stored.
+
+## Use Inference notebooks
+
+### A) Directly on computing machine
+
+1) In the root directory of the cloned repository, launch a jupyter server
+
+    ```
+    jupyter-notebook
+    ```
+
+2) Access the jupyter interface by clicking the link shown in terminal.
+
+3) In the interface, open the desired notebook.
 
 
-## Run commands
+### B) On a client machine
 
-python -m ....
+1) (REMOTE SERVER) Ensure that the computing machine launched a jupyter server using command. Consider using tmux to keep the server alive when disconnected. (Change XXXX to a free port number)
+
+    ```
+    jupyter-notebook --no-browser --port=XXXX
+    ```
+    
+    **-> Notice the url link starting with localhost. <-**
 
 
-## LICENSE
+2) (CLIENT) To access the jupyter interface from client machine, setup port forwarding between local port and server port.
 
-Shield: [![CC BY 4.0][cc-by-shield]][cc-by]
+    ```
+    ssh -N -L XXXX:localhost:XXXX user_name@server_name
+    ```
 
-This work is licensed under a
-[Creative Commons Attribution 4.0 International License][cc-by].
+3) (CLIENT) Follow the url link shown at **step 1** on a web browser on client machine. This opens jupyter interface.
 
-[![CC BY 4.0][cc-by-image]][cc-by]
 
-[cc-by]: http://creativecommons.org/licenses/by/4.0/
-[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
-[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
+3) In the interface, open the desired notebook.
+
