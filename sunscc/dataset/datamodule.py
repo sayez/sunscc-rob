@@ -1,7 +1,6 @@
 import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Type, Union
-from numpy.lib.arraysetops import isin
 import pytorch_lightning as pl
 from torch.utils.data import DataLoader
 from sunscc.dataset import PrepareStrategy, SetupStrategy

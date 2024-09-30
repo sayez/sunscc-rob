@@ -2,8 +2,8 @@
 name = "sunscc"
 version = "1.0.0"
 dependencies = [
-    "numpy",
-    "sunpy",
+    "numpy==1.26.4",
+    "sunpy==5.1.3",
     "pytorch_lightning",
     "omegaconf",
     "hydra-core",

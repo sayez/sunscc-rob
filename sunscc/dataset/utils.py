@@ -1,4 +1,4 @@
-from numpy.lib.function_base import interp
+# from numpy.lib.function_base import interp
 from sunscc.dataset.transform.pipelines import Compose
 import collections
 import zipfile

@@ -1,27 +1,17 @@
-from contextlib import AbstractContextManager
-import zipfile
 from sunscc.dataset.transform.pipelines import Compose
 import collections
 from functools import partial
 from torch.utils.data import Dataset
 from pathlib import Path
-from collections import defaultdict
 import logging
 import numpy as np
-import cv2
 import os
 from hydra.utils import call, instantiate
 import skimage.io as io
 
-import random
-
 from .utils import *
 from astropy.io import fits
-import matplotlib.pyplot as plt
 
-from .utils import *
-from astropy.io import fits
-import matplotlib.pyplot as plt
 
 import glob
 

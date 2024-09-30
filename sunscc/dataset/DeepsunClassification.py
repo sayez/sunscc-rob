@@ -1,7 +1,3 @@
-
-
-from email.mime import base
-from tokenize import group
 from sunscc.dataset.transform.pipelines import Compose
 import collections
 from functools import partial
