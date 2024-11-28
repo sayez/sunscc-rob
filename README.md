@@ -27,7 +27,12 @@
     | | | - All *
     | | | - ManualAnnotation * 
     | | - classification
-    # SunSCC: segmenting, grouping and classifying sunspots from ground-based observations using deep learning
+    | | | - 2002-2019 
+    | | | | - rebuttal_all_revised_filtered *
+    | | | | - rebuttal_overlap_only *
+    | - outputs **
+    ...
+
     ```
 
     `*` = Symbolic link to directories with same name in storage.
