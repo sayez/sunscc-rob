@@ -18,6 +18,8 @@
     pip install -e .
     ```
 
+    The editable (-e) option allows creation and use of functions after package installation. If you create a new function, you must restart open jupyter notebooks to reload new package function tree.
+
 4) IMPORTANT: Adapt the paths to local filesystem for datasets/outputs (using symbolic links if needed) - SunSCC expects the following structure:
 
     ```
