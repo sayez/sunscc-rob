@@ -44,7 +44,8 @@ classes=${10}
 echo "This script was launched with the following command:"
 echo $0 $@
 
-dt=$(date '+%Y-%m-%d/%H-%M-%S');
+dt='2025-02-25/19-29-57'
+# dt=$(date '+%Y-%m-%d/%H-%M-%S');
 hydra_out_dir="./outputs/${dt}_${job_name}"
 echo "OUTPUT RUN DIRECTORY: $hydra_out_dir"
 
@@ -71,8 +72,8 @@ if [ "$scheduler_type" = "MultistepLR" ]; then
                 use_dtypes=$use_dtypes \
                 trainer.max_epochs=$max_epochs \
                 model.classes=$classes \
-                dataset.num_workers=$num_workers \
-                logger.0.project=$project_name +logger.0.name=$job_name
+                dataset.num_workers=$num_workers # \
+                #logger.0.project=$project_name +logger.0.name=$job_name
 elif [ "$scheduler_type" = "StepLR" ]; then
     echo "StepLR"
     # Utiliser exp=2013-15_CombineLoss pour utiliser le scheduler StepLR
@@ -85,9 +86,9 @@ elif [ "$scheduler_type" = "StepLR" ]; then
                 trainer.max_epochs=$max_epochs \
                 model.classes=$classes \
                 dataset.num_workers=$num_workers \
-                logger.0.project=$project_name +logger.0.name=$job_name \
                 module.scheduler_interval=$scheduler_interval \
-                module.scheduler.step_size=$scheduler_step_size
+                module.scheduler.step_size=$scheduler_step_size #\
+                #logger.0.project=$project_name +logger.0.name=$job_name \
 else
     echo "No LR scheduler"
     # No LR scheduler = StepLR scheduler (step_size> max_epochs)
@@ -97,15 +98,15 @@ else
                 use_dtypes=$use_dtypes \
                 trainer.max_epochs=$max_epochs \
                 model.classes=$classes \
-                dataset.num_workers=$num_workers \
-                logger.0.project=$project_name +logger.0.name=$job_name 
+                dataset.num_workers=$num_workers #\
+                # logger.0.project=$project_name +logger.0.name=$job_name 
 fi
 
-output_file="$SLURM_JOB_NAME-$SLURM_JOB_ID.out"
-echo $output_file
+# output_file="$SLURM_JOB_NAME-$SLURM_JOB_ID.out"
+# echo $output_file
 
-run_dir=$(find outputs/ -name  "$(grep 'wandb: Run data is saved locally in ./wandb/' $output_file | sed -r 's/^([^ ]+ ){7}.\/wandb\///')" | sed 's/wandb\/.*//' )
-echo $run_dir
+# run_dir=$(find outputs/ -name  "$(grep 'wandb: Run data is saved locally in ./wandb/' $output_file | sed -r 's/^([^ ]+ ){7}.\/wandb\///')" | sed 's/wandb\/.*//' )
+# echo $run_dir
 
-mv $output_file $run_dir
+# mv $output_file $run_dir
 

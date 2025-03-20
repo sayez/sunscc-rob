@@ -17,6 +17,8 @@ scheduler_interval='epoch' # used for MultistepLR scheduler and StepLR scheduler
 scheduler_step_size=1 # used for StepLR scheduler, don't use for MultistepLR scheduler
 classes=["sunspot"]
 
+slurm=false
+
 for run_number in ${run_numbers[@]}; do
     for use_dtype in ${multi_thresh[@]}; do
         # echo ${i}
@@ -47,10 +49,11 @@ for run_number in ${run_numbers[@]}; do
         # job_name="2013-15_${id}" # No LR scheduler (DONE for scheduler_interval='epoch')
         # echo "$job_name"
 
-
-        # echo "sbatch Segmentation_slurm_launcher.sh workers=$num_workers classes=$classes use_dtype=$use_dtype num_epochs=$max_epochs project_name=$project_name job_name=$job_name, scheduler_type=$scheduler_type scheduler_interval=$scheduler_interval, scheduler_step_size=$scheduler_step_size run_number=$run_number classes=$classes"
-        echo "./scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes"
-        # sbatch ./scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes
+        # echo "sbatch Segmentation_slurm_train.sh workers=$num_workers classes=$classes use_dtype=$use_dtype num_epochs=$max_epochs project_name=$project_name job_name=$job_name, scheduler_type=$scheduler_type scheduler_interval=$scheduler_interval, scheduler_step_size=$scheduler_step_size run_number=$run_number classes=$classes"
+        echo "bash ./scripts/Segmentation_slurm_train.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes"
+        if [ "$slurm" = true ]; then
+            sbatch ./scripts/Segmentation_slurm_train.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes
+        fi
     done
 done
 

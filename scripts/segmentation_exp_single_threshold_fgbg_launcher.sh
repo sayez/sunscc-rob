@@ -18,6 +18,8 @@ scheduler_interval='epoch' # used for MultistepLR scheduler and StepLR scheduler
 scheduler_step_size=1 # used for StepLR scheduler, don't use for MultistepLR scheduler
 classes=["sunspot"]
 
+slurm=false
+
 for use_dtype in ${all_single_thresh[@]}; do
     # echo ${i}
     # echo ${i} | sed -e 's/.*\[\(T[0-9]+/\1/' # use regular expressions to get the threshold value in i
@@ -43,9 +45,11 @@ for use_dtype in ${all_single_thresh[@]}; do
 
     job_name="${job_name}_run${run_number}"
 
-    # echo "sbatch Segmentation_slurm_launcher.sh workers=$num_workers classes=$classes use_dtype=$use_dtype num_epochs=$max_epochs project_name=$project_name job_name=$job_name scheduler_type=$scheduler_type scheduler_interval=$scheduler_interval scheduler_step_size=$scheduler_step_size, run_number=$run_number, classes=$classes"
-    echo "./scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes"
-    sbatch ./scripts/Segmentation_slurm_launcher.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes
+    # echo "sbatch Segmentation_slurm_train.sh workers=$num_workers classes=$classes use_dtype=$use_dtype num_epochs=$max_epochs project_name=$project_name job_name=$job_name scheduler_type=$scheduler_type scheduler_interval=$scheduler_interval scheduler_step_size=$scheduler_step_size, run_number=$run_number, classes=$classes"
+    echo "bash ./scripts/Segmentation_slurm_train.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes"
+    if [ "$slurm" = true ]; then
+        sbatch ./scripts/Segmentation_slurm_train.sh $num_workers $use_dtype $max_epochs $project_name $job_name $scheduler_type $scheduler_interval $scheduler_step_size $run_number $classes
+    fi
 done
 
 

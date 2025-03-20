@@ -45,6 +45,7 @@ runids=(0) # id numbers of the runs to perform,
            # set several values to get an ensemble of classifiers
 
 job_ids=()
+slurm=false
 
 for da_freq in "${data_aug_freq[@]}"
 do
@@ -68,12 +69,15 @@ do
 
             echo "parts_to_train: $parts_to_train"
 
-            echo "./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq"
-            job_id=$(bash ./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq)
-        
-            # extract job id
-            job_id=$(echo $job_id | grep -o -E '[0-9]+')
-            job_ids+=($job_id)
+            echo "bash ./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq"
+            if [ "$slurm" = true ]; then
+                job_id=$(sbatch ./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq)
+                # job_id=$(bash ./scripts/classif_TrainP1.sh $random_move $focus_on_group "$use_dtypes" $use_npy "$use_classes" $max_epochs "$parts_to_train" $lr $T_max $eta_min $batch_size $num_workers $c $job_name $wandb_project "$visual_input" "$numeric_input" $cascade $resnet_type $runid $data_aug $data_aug_type $da_freq)
+            
+                # extract job id
+                job_id=$(echo $job_id | grep -o -E '[0-9]+')
+                job_ids+=($job_id)
+            fi
         done
 
     done
