@@ -26,6 +26,9 @@ class WandBCallback(pl.Callback):
         logger:WandbLogger = pl_module.logger
         if logger is None:
             return
+        
+        if not isinstance(logger, WandbLogger):
+            return
 
         if Path("./models").exists() and self.log_models:
             artifact = wandb.Artifact('models', type='dataset')
@@ -44,6 +47,9 @@ class WandBCallback(pl.Callback):
     def on_test_end(self, trainer, pl_module):
         logger:WandbLogger = pl_module.logger
         if logger is None:
+            return
+        
+        if not isinstance(logger, WandbLogger):
             return
          
         logger.experiment.finish()
