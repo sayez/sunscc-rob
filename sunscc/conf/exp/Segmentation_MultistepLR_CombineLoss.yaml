@@ -13,10 +13,15 @@ trainer:
   # limit_test_batches: 1
   # limit_predict_batches: 1
 
+## Uncomment to use wandb logger (useful online tool for metrics logging, requires an account)
+# logger:
+  # - _target_: pytorch_lightning.loggers.WandbLogger
+  #   project: 'sunscc'
+  #   save_dir: "."
+# logger : []
 logger:
-  - _target_: pytorch_lightning.loggers.WandbLogger
-    project: 'sunscc'
-    save_dir: "."
+  - _target_: pytorch_lightning.loggers.CSVLogger
+    save_dir: 'csv_metrics'
 
 
 
@@ -124,9 +129,9 @@ callbacks:
     monitor: val_meaniou
     mode: max
     filename: "{epoch}-{val_meaniou:.2f}"
-  wandb:
-    _target_: sunscc.callback.WandBCallback
-    log_models: false
+  # wandb:
+  #   _target_: sunscc.callback.WandBCallback
+  #   log_models: false
   LR_monitor:
     _target_: "pytorch_lightning.callbacks.LearningRateMonitor"
   Save_prediction:

@@ -7,7 +7,7 @@ focus_on_group=false
 
 
 use_dtypes=['image','T425-T375-T325_fgbg']
-use_npy='filtered/all_samples.npy' # Do not set the _train.npy, _val.npy or test.npy,
+use_npy='rebuttal_all_revised_filtered/all_samples.npy' # Do not set the _train.npy, _val.npy or test.npy,
                                                         # it is added automatically in the dataloader.
 
 use_classes=['A','B','C','SuperGroup','H']

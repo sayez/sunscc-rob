@@ -147,14 +147,3 @@ else
 
 
 fi
-
-# move output file to wandb folder
-
-output_file="$SLURM_JOB_NAME-$SLURM_JOB_ID.out"
-echo $output_file
-
-run_dir=$(find outputs/ -name  "$(grep 'wandb: Run data is saved locally in ./wandb/' $output_file | sed -r 's/^([^ ]+ ){7}.\/wandb\///')" | sed 's/wandb\/.*//' )
-echo $run_dir
-
-mv $output_file $run_dir
-

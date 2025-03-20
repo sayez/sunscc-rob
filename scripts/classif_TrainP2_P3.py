@@ -74,7 +74,7 @@ def main(args):
     conf2.trainer.max_epochs=args.max_epochs
     conf2.dataset.char_to_balance = 'class2'
 
-    conf2.logger[0]['project']=all_overrides["wandb"]['project']
+    # conf2.logger[0]['project']=all_overrides["wandb"]['project']
 
     module, datamodule = load_from_cfg(conf2, recursive=False)
 
@@ -144,7 +144,7 @@ def main(args):
     # conf3.module.lr=1e-8
     # conf3.module.scheduler=all_overrides["scheduler"]
     # conf3.module.scheduler_interval=all_overrides["scheduler_interval"]
-    conf3.logger[0]['project']=all_overrides["wandb"]['project']
+    # conf3.logger[0]['project']=all_overrides["wandb"]['project']
 
     module, datamodule = load_from_cfg(conf3, recursive=False)
 

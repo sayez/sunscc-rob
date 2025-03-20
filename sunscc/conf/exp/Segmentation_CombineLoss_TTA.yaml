@@ -14,7 +14,10 @@ trainer:
   # limit_predict_batches: 1
 
 
-logger : []
+# logger : []
+logger:
+  - _target_: pytorch_lightning.loggers.CSVLogger
+    save_dir: 'csv_metrics'
 
 
 use_dtypes: "???"
@@ -88,8 +91,8 @@ callbacks:
     monitor: val_meaniou
     mode: max
     filename: "{epoch}-{val_meaniou:.2f}"
-  wandb:
-    _target_: sunscc.callback.WandBCallback
-    log_models: false
+  # wandb:
+  #   _target_: sunscc.callback.WandBCallback
+  #   log_models: false
   LR_monitor:
     _target_: "pytorch_lightning.callbacks.LearningRateMonitor"
