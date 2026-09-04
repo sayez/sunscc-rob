@@ -1,5 +1,6 @@
-# SunSCC: segmenting, grouping and classifying sunspots from ground-based observations using deep learning
+# SunSCC
 
+ 🏛️ Official repository of the paper [SunSCC: segmenting, grouping and classifying sunspots from ground-based observations using deep learning](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2023JA031548) published in _JGR Space Physics, Vol. 128, Issue 12 (2023)_.
 
 ## Installation
 
